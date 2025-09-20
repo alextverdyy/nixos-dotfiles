@@ -1,16 +1,33 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
 
   # Standard .config/directory
   configs = {
     qtile = "qtile";
     nvim = "nvim";
+    hypr = "hypr";
+    hyprpanel = "hyprpanel";
+  };
+
+  configJson =
+    builtins.fromJSON (builtins.readFile ./config/hyprpanel/config.json);
+  themeJson =
+    builtins.fromJSON (builtins.readFile ./config/hyprpanel/theme.json);
+  hyprpanelSettings = configJson // themeJson;
+
+  baseConfigs = builtins.mapAttrs
+    (name: subpath: {
+      source = create_symlink ./config/${subpath};
+      recursive = true;
+    })
+    configs;
+
+  hyprpanelConfig = {
+    "hyprpanel/config.json".text = builtins.toJSON hyprpanelSettings;
   };
 in
 {
-  imports = [ ./modules/suckless.nix ];
   home.username = "tverdyy";
   home.homeDirectory = "/home/tverdyy";
   home.stateVersion = "25.05";
@@ -21,12 +38,7 @@ in
     };
   };
 
-  xdg.configFile = builtins.mapAttrs
-    (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+  xdg.configFile = lib.recursiveUpdate baseConfigs hyprpanelConfig;
 
   home.packages = with pkgs; [
     gnumake
@@ -45,7 +57,15 @@ in
     ruby
     fzf
     gh
+    kitty
+    wofi
+    libsForQt5.dolphin
+    hyprpaper
+    hyprcursor
+    phinger-cursors
   ];
+
+  programs.hyprpanel = { enable = true; };
 
   programs.git = {
     enable = true;

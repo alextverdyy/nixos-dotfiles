@@ -22,11 +22,6 @@
       enable = true;
       autoRepeatDelay = 200;
       autoRepeatInterval = 35;
-      windowManager.qtile.enable = true;
-      windowManager.dwm = {
-        enable = true;
-        package = pkgs.dwm.overrideAttrs { src = ./config/dwm; };
-      };
     };
 
     picom.enable = true;
@@ -40,6 +35,7 @@
   };
 
   programs.firefox.enable = true;
+  programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -49,6 +45,7 @@
     solargraph
     xclip
     typescript
+    kitty
   ];
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
