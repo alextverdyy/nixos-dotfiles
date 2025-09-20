@@ -36,6 +36,14 @@
 
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
+  programs.thunar.enable = true;
+
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+
+  services.tumbler.enable = true; # Thumbnail support for images
 
   environment.systemPackages = with pkgs; [
     vim
