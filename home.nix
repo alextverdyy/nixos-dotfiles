@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   user = "tverdyy";
@@ -14,14 +17,14 @@ let
     tmux = "tmux";
     fish = "fish";
   };
-in
-{
-  imports = [ ./modules/neovim.nix ./modules/git.nix ];
+in {
+  imports = [./modules/neovim.nix ./modules/git.nix];
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "25.05";
 
-  xdg.configFile = builtins.mapAttrs
+  xdg.configFile =
+    builtins.mapAttrs
     (name: subpath: {
       source = create_symlink "${dotfiles}/${subpath}";
       recursive = true;
@@ -60,8 +63,8 @@ in
     sesh
     gum
     yq
+    carapace
   ];
 
   programs.waybar.enable = true;
-
 }

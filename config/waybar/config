@@ -12,14 +12,24 @@
   "modules-right": [
     "tray",
     "network",
+    "custom/separator",
     "battery",
+    "custom/separator",
+    "clock",
+    "custom/separator",
     "custom/powermenu"
   ],
   "hyprland/submap": {
     "format": " {}"
   },
   "hyprland/workspaces": {
-    "format": "{name}"
+    "format": "{icon}",
+    "format-icons": {
+      "active-only": false,
+      "urgent": "",
+      "active": "",
+      "default": ""
+    }
   },
   "tray": {
     "icon-size": 12,
@@ -134,5 +144,10 @@
     "justify": "center",
     "on-click": "wofi --show drun",
     "on-click-right": "killall wofi"
+  },
+  "custom/separator": {
+    "format": "",
+    "interval": "once",
+    "tooltip": false
   }
 }
