@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -8,6 +8,9 @@ let
     nvim = "nvim";
     hypr = "hypr";
     waybar = "waybar";
+    wofi = "wofi";
+    hyprland-autoname-workspaces = "hyprland-autoname-workspaces";
+    kitty = "kitty";
   };
 in
 {
@@ -54,6 +57,9 @@ in
     hyprcursor
     phinger-cursors
     wl-clipboard
+    btop
+    wofi
+    hyprland-autoname-workspaces
   ];
 
   programs.waybar.enable = true;

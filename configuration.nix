@@ -4,8 +4,11 @@
   imports = [ ./hardware-configuration.nix ];
 
   programs.nix-ld.enable = true;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -52,6 +55,8 @@
     typescript
     kitty
     lazygit
+    hyprland-autoname-workspaces
+    inotify-tools
   ];
 
   fonts.packages = with pkgs; [
