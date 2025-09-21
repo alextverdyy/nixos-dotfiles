@@ -18,7 +18,7 @@
     fish = "fish";
   };
 in {
-  imports = [./modules/neovim.nix ./modules/git.nix];
+  imports = [./modules/neovim.nix ./modules/git.nix ./modules/yazi.nix];
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "25.05";
