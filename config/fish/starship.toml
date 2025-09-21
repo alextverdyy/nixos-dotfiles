@@ -1,0 +1,13 @@
+
+# Cambiar el símbolo del prompt
+[character]
+symbol = "kk"
+error_symbol = "✗"
+
+# Desactivar el prompt de tiempo
+[time]
+disabled = true
+
+# Cambiar colores
+[directory]
+style = "cyan"

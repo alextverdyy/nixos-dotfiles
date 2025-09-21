@@ -20,14 +20,6 @@ in
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "25.05";
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
-      logout = "sudo pkill -KILL -u ${user}";
-      nix-files = "cd ~/nixos-dotfiles && nvim";
-    };
-  };
 
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
@@ -64,6 +56,10 @@ in
     hyprland-autoname-workspaces
     starship
     tmux
+    eza
+    sesh
+    gum
+    yq
   ];
 
   programs.waybar.enable = true;

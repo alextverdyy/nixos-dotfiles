@@ -34,6 +34,7 @@
   users.users.tverdyy = {
     isNormalUser = true;
     description = "tverdyy";
+    shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [ tree ];
   };
@@ -65,8 +66,6 @@
     efibootmgr
     fish
   ];
-
-  users.defaultUserShell = pkgs.fish;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
