@@ -1,0 +1,4 @@
+[submodule "nvim"]
+	path = config/nvim
+	url = https://github.com/alextverdyy/nvim-config
+  branch = lazy

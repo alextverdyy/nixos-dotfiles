@@ -5,7 +5,6 @@ let
   user = "tverdyy";
 
   configs = {
-    qtile = "qtile";
     nvim = "nvim";
     hypr = "hypr";
     waybar = "waybar";
