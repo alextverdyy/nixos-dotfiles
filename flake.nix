@@ -6,15 +6,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    inputs.nix-yazi-plugins = {
+    nix-yazi-plugins = {
       url = "github:lordkekz/nix-yazi-plugins?ref=yazi-v0.2.5";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = {
     nixpkgs,
     home-manager,
+    nix-yazi-plugins,
     ...
   }: let
     system = "x86_64-linux";
