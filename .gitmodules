@@ -5,3 +5,7 @@
 [submodule "config/tmux"]
 	path = config/tmux
 	url = https://github.com/alextverdyy/tmux
+[submodule "config/fish"]
+	path = config/fish
+	url = https://github.com/alextverdyy/fish-config
+
