@@ -4,11 +4,13 @@
   imports = [ ./hardware-configuration.nix ];
 
   programs.nix-ld.enable = true;
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = false;
+
+  # Activamos GRUB en UEFI
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.device = "nodev"; # EFI, no toca discos
+  boot.loader.grub.efiSupport = true; # necesario para UEFI
+  boot.loader.grub.useOSProber = true; # detecta Windows u otras distros
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -26,6 +28,8 @@
 
     picom.enable = true;
   };
+
+  programs.fish.enable = true;
 
   users.users.tverdyy = {
     isNormalUser = true;
@@ -57,7 +61,12 @@
     lazygit
     hyprland-autoname-workspaces
     inotify-tools
+    os-prober
+    efibootmgr
+    fish
   ];
+
+  users.defaultUserShell = pkgs.fish;
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono

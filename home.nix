@@ -11,6 +11,8 @@ let
     wofi = "wofi";
     hyprland-autoname-workspaces = "hyprland-autoname-workspaces";
     kitty = "kitty";
+    tmux = "tmux";
+    fish = "fish";
   };
 in
 {
@@ -18,7 +20,7 @@ in
   home.username = user;
   home.homeDirectory = "/home/${user}";
   home.stateVersion = "25.05";
-  programs.bash = {
+  programs.fish = {
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
@@ -60,6 +62,8 @@ in
     btop
     wofi
     hyprland-autoname-workspaces
+    starship
+    tmux
   ];
 
   programs.waybar.enable = true;
