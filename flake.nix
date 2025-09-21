@@ -1,36 +1,20 @@
 {
   description = "Tverdyy NixOS";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+  outputs = { nixpkgs, home-manager, ... }:
+    let system = "x86_64-linux";
     in
     {
-      devShells.${system}.suckless = pkgs.mkShell {
-        # toolchain + headers/libs
-        packages = with pkgs; [
-          pkg-config
-          xorg.libX11
-          xorg.libXft
-          xorg.libXinerama
-          fontconfig
-          freetype
-          harfbuzz
-          gcc
-          gnumake
-        ];
-      };
 
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        system = system;
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager

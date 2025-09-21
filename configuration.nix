@@ -1,16 +1,13 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   programs.nix-ld.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Madrid";
@@ -43,7 +40,7 @@
     thunar-volman
   ];
 
-  services.tumbler.enable = true; # Thumbnail support for images
+  services.tumbler.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -54,12 +51,16 @@
     xclip
     typescript
     kitty
+    lazygit
   ];
 
-  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.monaspace
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11";
 
 }

@@ -50,7 +50,7 @@
   },
   "theme": {
     "bar": {
-      "transparent": false
+      "transparent": true
     },
     "font": {
       "name": "JetBrainsMono Nerd Font Regular",

@@ -2,23 +2,26 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  user = "tverdyy";
 
-  # Standard .config/directory
   configs = {
     qtile = "qtile";
     nvim = "nvim";
     hypr = "hypr";
-    hyprpanel = "hyprpanel";
+    waybar = "waybar";
   };
 in
 {
-  home.username = "tverdyy";
-  home.homeDirectory = "/home/tverdyy";
+  imports = [ ./modules/neovim.nix ./modules/git.nix ];
+  home.username = user;
+  home.homeDirectory = "/home/${user}";
   home.stateVersion = "25.05";
   programs.bash = {
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
+      logout = "sudo pkill -KILL -u ${user}";
+      nix-files = "cd ~/nixos-dotfiles && nvim";
     };
   };
 
@@ -51,33 +54,9 @@ in
     hyprpaper
     hyprcursor
     phinger-cursors
+    wl-clipboard
   ];
 
-  programs.hyprpanel = { enable = true; };
-
-  programs.git = {
-    enable = true;
-    userName = "Oleg Tverdyy Tereshchenko";
-    userEmail = "alexverdyy@gmail.com";
-
-    extraConfig = { credential.helper = "!gh auth git-credential"; };
-  };
-
-  programs.neovim = {
-    enable = true;
-    withNodeJs = true;
-    withPython3 = true;
-
-    extraPackages = with pkgs; [
-      gcc
-      gnumake
-      cmake
-      tree-sitter
-      nodejs
-      yarn
-      unzip
-      (python3.withPackages (ps: with ps; [ pynvim ]))
-    ];
-  };
+  programs.waybar.enable = true;
 
 }
